@@ -1,0 +1,27 @@
+name: Send Telegram Notification
+
+on:
+  workflow_run:
+    workflows: [Deploy]
+    types:
+      - completed
+
+jobs:
+  send_telegram_message:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Notification
+        run: |
+          WORKFLOW_URL="${{ github.event.workflow_run.html_url }}"
+
+          if [ "${{ github.event.workflow_run.conclusion }}" = "success" ]; then
+            MESSAGE="✅ ${{ github.repository }}: Deploy succeeded."
+          elif [ "${{ github.event.workflow_run.conclusion }}" = "failure" ]; then
+            MESSAGE="❌ ${{ github.repository }}: Deploy failed. $WORKFLOW_URL"
+          else
+            MESSAGE="ℹ️ ${{ github.repository }}: Deploy ${{ github.event.workflow_run.conclusion }}."
+          fi
+
+          curl -X POST https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage \
+               -F chat_id=${{ secrets.TELEGRAM_BOT_CHAT }} \
+               -F text="$MESSAGE"

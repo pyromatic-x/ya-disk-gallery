@@ -1,0 +1,41 @@
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@mutations": ["./src/hooks/mutations/index.ts"],
+      "@queries": ["./src/hooks/query/index.ts"],
+      "@actions": ["./src/actions/index.ts"],
+      "@schemas": ["./src/lib/database/schemas/index.ts"],
+      "@database": ["./src/lib/database/database.ts"],
+      "@disk": ["./src/lib/disk/index.ts"],
+      "@folder/*": ["./src/app/(folder)/folder/[folder]/_components/*"]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "src/app/api/tags/change"
+  ],
+  "exclude": ["node_modules"]
+}
