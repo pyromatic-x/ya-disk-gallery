@@ -1,4 +1,4 @@
-Live demo lies [here](https://disk.pyromatic.ru).
+Live demo lies [here](https://disk-showcase.pyromatic.ru/login).
 
 ## Legend
 
